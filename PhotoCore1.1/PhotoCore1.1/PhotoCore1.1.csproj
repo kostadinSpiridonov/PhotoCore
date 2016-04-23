@@ -1,0 +1,537 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6E5A14EC-3AFF-4C51-B2AA-A7642B25C04D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PhotoCore1._1</RootNamespace>
+    <AssemblyName>PhotoCore1.1</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Core.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AForge">
+      <HintPath>E:\27.04.2014\PhotoCore\PhotoCore 1.0\Install\PhotoCore\bin\Debug\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging, Version=2.2.5.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>E:\27.04.2014\PhotoCore\PhotoCore 1.0\Install\PhotoCore\bin\Debug\AForge.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro">
+      <HintPath>..\packages\MahApps.Metro.0.12.1.0\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Controls.Ribbon" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.0.12.1.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Converters\SizeGridConverter.cs" />
+    <Compile Include="Models\ColorModel.cs" />
+    <Compile Include="Models\Effects\ChangeColorPic.cs" />
+    <Compile Include="Models\Effects\MergeImage.cs" />
+    <Compile Include="Models\Effects\MyCartoon.cs" />
+    <Compile Include="Models\Effects\MyEmboss.cs" />
+    <Compile Include="Models\Effects\MyGamma.cs" />
+    <Compile Include="Models\Effects\MyGrayScale.cs" />
+    <Compile Include="Models\Effects\MyMedian.cs" />
+    <Compile Include="Models\Effects\MyMonochrome.cs" />
+    <Compile Include="Models\Effects\MySmooth.cs" />
+    <Compile Include="Models\Effects\MySolarise.cs" />
+    <Compile Include="Models\Effects\MySphere.cs" />
+    <Compile Include="Models\Effects\MySwirl.cs" />
+    <Compile Include="Models\Effects\MyTint.cs" />
+    <Compile Include="Models\Effects\MyTransparenty.cs" />
+    <Compile Include="Models\Effects\MyWarp.cs" />
+    <Compile Include="Models\Effects\MyWater.cs" />
+    <Compile Include="Models\FrameModel.cs" />
+    <Compile Include="Models\Images.cs" />
+    <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\UndoRedoModel.cs" />
+    <Compile Include="StaticFunctionClasses\ConvMatrix.cs" />
+    <Compile Include="StaticFunctionClasses\DrawingImageFunctions.cs" />
+    <Compile Include="StaticFunctionClasses\MatrixFunction.cs" />
+    <Compile Include="StaticFunctionClasses\SelectedPoints.cs" />
+    <Compile Include="Models\ToolTips.cs" />
+    <Compile Include="StaticFunctionClasses\ImageConverterFormat.cs" />
+    <Compile Include="StaticFunctionClasses\ImageFunction.cs" />
+    <Compile Include="StaticFunctionClasses\StaticCollections.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\CollageViewModel.cs" />
+    <Compile Include="ViewModels\ColorsViewModel.cs" />
+    <Compile Include="ViewModels\FirstPageEffects.cs" />
+    <Compile Include="ViewModels\FourPageEffects.cs" />
+    <Compile Include="ViewModels\FramesViewModel.cs" />
+    <Compile Include="ViewModels\InkCanvasViewModel.cs" />
+    <Compile Include="ViewModels\LanguageViewModel.cs" />
+    <Compile Include="ViewModels\LibraryViewModel.cs" />
+    <Compile Include="ViewModels\OptionsViewModel.cs" />
+    <Compile Include="ViewModels\ResizeViewModel.cs" />
+    <Compile Include="ViewModels\SecondPageEffects.cs" />
+    <Compile Include="ViewModels\ThirdPageEffects.cs" />
+    <Compile Include="ViewModels\TopPanelViewModel.cs" />
+    <Compile Include="ViewModels\VisibilityProperties.cs" />
+    <Compile Include="View\Capture.xaml.cs">
+      <DependentUpon>Capture.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Collage.xaml.cs">
+      <DependentUpon>Collage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollagesPatternViews\Eight.xaml.cs">
+      <DependentUpon>Eight.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollagesPatternViews\Eleven.xaml.cs">
+      <DependentUpon>Eleven.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollagesPatternViews\Fiftheen.xaml.cs">
+      <DependentUpon>Fiftheen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollagesPatternViews\First.xaml.cs">
+      <DependentUpon>First.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollagesPatternViews\Five.xaml.cs">
+      <DependentUpon>Five.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollagesPatternViews\Four.xaml.cs">
+      <DependentUpon>Four.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollagesPatternViews\Fourteen.xaml.cs">
+      <DependentUpon>Fourteen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollagesPatternViews\Nine.xaml.cs">
+      <DependentUpon>Nine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollagesPatternViews\Second.xaml.cs">
+      <DependentUpon>Second.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollagesPatternViews\Seven.xaml.cs">
+      <DependentUpon>Seven.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollagesPatternViews\Six.xaml.cs">
+      <DependentUpon>Six.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollagesPatternViews\Sixteen.xaml.cs">
+      <DependentUpon>Sixteen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollagesPatternViews\Ten.xaml.cs">
+      <DependentUpon>Ten.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollagesPatternViews\Thirteen.xaml.cs">
+      <DependentUpon>Thirteen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollagesPatternViews\Three.xaml.cs">
+      <DependentUpon>Three.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollagesPatternViews\Twelve.xaml.cs">
+      <DependentUpon>Twelve.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Frames.xaml.cs">
+      <DependentUpon>Frames.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FullScreen.xaml.cs">
+      <DependentUpon>FullScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Library.xaml.cs">
+      <DependentUpon>Library.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainImageView.xaml.cs">
+      <DependentUpon>MainImageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Resize.xaml.cs">
+      <DependentUpon>Resize.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RightPanel\FirstPage.xaml.cs">
+      <DependentUpon>FirstPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RightPanel\FourPage.xaml.cs">
+      <DependentUpon>FourPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RightPanel\MainPanel.xaml.cs">
+      <DependentUpon>MainPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RightPanel\SecondPage.xaml.cs">
+      <DependentUpon>SecondPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RightPanel\ThirdPage.xaml.cs">
+      <DependentUpon>ThirdPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TopPanel.xaml.cs">
+      <DependentUpon>TopPanel.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="View\Capture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Collage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollagesPatternViews\Eight.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollagesPatternViews\Eleven.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollagesPatternViews\Fiftheen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollagesPatternViews\First.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollagesPatternViews\Five.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollagesPatternViews\Four.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollagesPatternViews\Fourteen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollagesPatternViews\Nine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollagesPatternViews\Second.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollagesPatternViews\Seven.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollagesPatternViews\Six.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollagesPatternViews\Sixteen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollagesPatternViews\Ten.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollagesPatternViews\Thirteen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollagesPatternViews\Three.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollagesPatternViews\Twelve.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Frames.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FullScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Library.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainImageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Resize.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RightPanel\FirstPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RightPanel\FourPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RightPanel\MainPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RightPanel\SecondPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RightPanel\ThirdPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TopPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Resource Include="Core.ico" />
+    <Content Include="Help\HelpPhotoCore.chm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Resources\pencil.ani" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Back.png" />
+    <Resource Include="Resources\Brush.png" />
+    <Resource Include="Resources\Close.png" />
+    <Resource Include="Resources\CloseFullscreen.png" />
+    <Resource Include="Resources\Copy.png" />
+    <Resource Include="Resources\Core.ico" />
+    <Resource Include="Resources\Cut.png" />
+    <Resource Include="Resources\DefaultPic.jpg" />
+    <Resource Include="Resources\Edit.png" />
+    <Resource Include="Resources\Effect.png" />
+    <Resource Include="Resources\Effect2.png" />
+    <Resource Include="Resources\Effect3.png" />
+    <Resource Include="Resources\Effect4.png" />
+    <Resource Include="Resources\Fullscreen.png" />
+    <Resource Include="Resources\Help.png" />
+    <Resource Include="Resources\Icon.png" />
+    <Resource Include="Resources\LeftLibrary.png" />
+    <Resource Include="Resources\Note.png" />
+    <Resource Include="Resources\ResizeIcon.png" />
+    <Resource Include="Resources\RightLibrary.png" />
+    <Resource Include="Resources\SaveAll.png" />
+    <Resource Include="Resources\SaveOne.png" />
+    <Resource Include="Resources\Skew_Hor.png" />
+    <Resource Include="Resources\Skew_Ver.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MainPanelIcons\Bold.png" />
+    <Resource Include="MainPanelIcons\Capture.png" />
+    <Resource Include="MainPanelIcons\Collage.png" />
+    <Resource Include="MainPanelIcons\Crop.png" />
+    <Resource Include="MainPanelIcons\Edit Color.png" />
+    <Resource Include="MainPanelIcons\Eraser.png" />
+    <Resource Include="MainPanelIcons\Exit.png" />
+    <Resource Include="MainPanelIcons\FlipHor.png" />
+    <Resource Include="MainPanelIcons\FlipVer.png" />
+    <Resource Include="MainPanelIcons\Frames.png" />
+    <Resource Include="MainPanelIcons\Italic.png" />
+    <Resource Include="MainPanelIcons\Library.png" />
+    <Resource Include="MainPanelIcons\New.png" />
+    <Resource Include="MainPanelIcons\open.png" />
+    <Resource Include="MainPanelIcons\Paste.png" />
+    <Resource Include="MainPanelIcons\Pen.png" />
+    <Resource Include="MainPanelIcons\Picker.png" />
+    <Resource Include="MainPanelIcons\Redo.png" />
+    <Resource Include="MainPanelIcons\Remove.png" />
+    <Resource Include="MainPanelIcons\Resize.png" />
+    <Resource Include="MainPanelIcons\Res_Hor.png" />
+    <Resource Include="MainPanelIcons\Res_Ver.png" />
+    <Resource Include="MainPanelIcons\Rot_Left.png" />
+    <Resource Include="MainPanelIcons\Rot_Right.png" />
+    <Resource Include="MainPanelIcons\save.png" />
+    <Resource Include="MainPanelIcons\Select.png" />
+    <Resource Include="MainPanelIcons\Strikeout.png" />
+    <Resource Include="MainPanelIcons\Text.png" />
+    <Resource Include="MainPanelIcons\Thikness1.png" />
+    <Resource Include="MainPanelIcons\Thikness2.png" />
+    <Resource Include="MainPanelIcons\Thikness3.png" />
+    <Resource Include="MainPanelIcons\Thikness4.png" />
+    <Resource Include="MainPanelIcons\ThiknessAll.png" />
+    <Resource Include="MainPanelIcons\Underline.png" />
+    <Resource Include="MainPanelIcons\Undo.png" />
+    <Resource Include="MainPanelIcons\Visible.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\WindowColor.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Collages\1.png" />
+    <Resource Include="Collages\10.png" />
+    <Resource Include="Collages\11.png" />
+    <Resource Include="Collages\12.png" />
+    <Resource Include="Collages\13.png" />
+    <Resource Include="Collages\14.png" />
+    <Resource Include="Collages\15.png" />
+    <Resource Include="Collages\16.png" />
+    <Resource Include="Collages\2.png" />
+    <Resource Include="Collages\3.png" />
+    <Resource Include="Collages\4.png" />
+    <Resource Include="Collages\5.png" />
+    <Resource Include="Collages\6.png" />
+    <Resource Include="Collages\7.png" />
+    <Resource Include="Collages\8.png" />
+    <Resource Include="Collages\9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="RightPanelIcons\Brightness.png" />
+    <Resource Include="RightPanelIcons\Cartoon.png" />
+    <Resource Include="RightPanelIcons\ChangeColor.png" />
+    <Resource Include="RightPanelIcons\ChannelRotate.png" />
+    <Resource Include="RightPanelIcons\Contrast.png" />
+    <Resource Include="RightPanelIcons\Corners.png" />
+    <Resource Include="RightPanelIcons\Edge.png" />
+    <Resource Include="RightPanelIcons\Emboss.png" />
+    <Resource Include="RightPanelIcons\Gamma.png" />
+    <Resource Include="RightPanelIcons\Gray.png" />
+    <Resource Include="RightPanelIcons\Hue.png" />
+    <Resource Include="RightPanelIcons\Invert.png" />
+    <Resource Include="RightPanelIcons\Jitter.png" />
+    <Resource Include="RightPanelIcons\Median.png" />
+    <Resource Include="RightPanelIcons\Merge.png" />
+    <Resource Include="RightPanelIcons\Monochrome.png" />
+    <Resource Include="RightPanelIcons\Oil.png" />
+    <Resource Include="RightPanelIcons\Pixel.png" />
+    <Resource Include="RightPanelIcons\Posterization.png" />
+    <Resource Include="RightPanelIcons\Sepia.png" />
+    <Resource Include="RightPanelIcons\Sharpen.png" />
+    <Resource Include="RightPanelIcons\Smooth.png" />
+    <Resource Include="RightPanelIcons\Solarise.png" />
+    <Resource Include="RightPanelIcons\Sphere.png" />
+    <Resource Include="RightPanelIcons\Swirl.png" />
+    <Resource Include="RightPanelIcons\Tint.png" />
+    <Resource Include="RightPanelIcons\Transparanty.png" />
+    <Resource Include="RightPanelIcons\Warp.png" />
+    <Resource Include="RightPanelIcons\Water.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MainPanelIcons\Bulgaria.png" />
+    <Resource Include="MainPanelIcons\English.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Frames\1.png" />
+    <Resource Include="Frames\10.png" />
+    <Resource Include="Frames\11.png" />
+    <Resource Include="Frames\12.png" />
+    <Resource Include="Frames\13.png" />
+    <Resource Include="Frames\14.png" />
+    <Resource Include="Frames\15.png" />
+    <Resource Include="Frames\16.png" />
+    <Resource Include="Frames\17.png" />
+    <Resource Include="Frames\2.png" />
+    <Resource Include="Frames\20.png" />
+    <Resource Include="Frames\21.png" />
+    <Resource Include="Frames\22.png" />
+    <Resource Include="Frames\23.png" />
+    <Resource Include="Frames\24.png" />
+    <Resource Include="Frames\25.png" />
+    <Resource Include="Frames\26.png" />
+    <Resource Include="Frames\3.png" />
+    <Resource Include="Frames\4.png" />
+    <Resource Include="Frames\5.png" />
+    <Resource Include="Frames\6.png" />
+    <Resource Include="Frames\7.png" />
+    <Resource Include="Frames\8.png" />
+    <Resource Include="Frames\9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="Resources\StartImage.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

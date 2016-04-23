@@ -1,0 +1,48 @@
+﻿<MetroControls:MetroWindow x:Class="PhotoCore1._1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:MetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:mv="clr-namespace:PhotoCore1._1.View"
+        xmlns:vm="clr-namespace:PhotoCore1._1.ViewModels"
+        xmlns:mvv="clr-namespace:PhotoCore1._1.View.RightPanel"
+                           BorderBrush="{Binding ColorsViewModel.ThemeColor}"
+        Background="{Binding OptionsVModel.SelectedColor.BrushColor}"
+        BorderThickness="1"
+        Title="PhotoCore"
+         Icon="Resources/Core.ico"
+        WindowStartupLocation="CenterScreen"
+        Height="720" Width="1280"  
+                           MinHeight="500"
+                           MinWidth="1000"
+                          PreviewKeyDown="KeyCombinations"
+        Closing="Exit_Click"
+        WindowState="Maximized">
+    <MetroControls:MetroWindow.WindowCommands>
+        <MetroControls:WindowCommands>
+            <Button Click="Help_Click" MetroControls:ControlsHelper.ButtonWidth="8">
+                <Button.Content>
+                    <Image Margin="2,2,2,2" Source="Resources/Help.png"></Image>
+                </Button.Content>
+            </Button>
+        </MetroControls:WindowCommands>
+    </MetroControls:MetroWindow.WindowCommands>
+    <MetroControls:MetroWindow.DataContext>
+        <vm:BaseViewModel x:Name="BaseViewModel"></vm:BaseViewModel>
+    </MetroControls:MetroWindow.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="130"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <mv:TopPanel  Grid.Row="0"></mv:TopPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.825*"></ColumnDefinition>
+                <ColumnDefinition Width="0.175*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <mv:MainImageView x:Name="MainImage" Grid.ColumnSpan="2" DataContext="{Binding ElementName=BaseViewModel}" Grid.Row="1">
+        </mv:MainImageView >
+        <mvv:MainPanel Margin="0,0,0,-2" x:Name="MainPanel" DataContext="{Binding ElementName=BaseViewModel}" Grid.Row="1" Grid.Column="1" IsVisibleChanged="MainPanel_IsVisibleChanged"  Visibility="{Binding VisibilityPropertiesViewModel.RightPanel,Converter={StaticResource BooleanToVisibilityConverter}}"></mvv:MainPanel>
+        </Grid>
+    </Grid>
+</MetroControls:MetroWindow>

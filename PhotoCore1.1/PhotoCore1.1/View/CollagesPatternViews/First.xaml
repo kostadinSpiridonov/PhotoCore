@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="PhotoCore1._1.View.CollagesPatternViews.First"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             mc:Ignorable="d" 
+             IsVisibleChanged="UserControl_IsHitTestVisibleChanged"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Name="FirstPattern" Background="Transparent" Margin="10,10,10,10" Height="350">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Border Height="350"
+                BorderBrush="{Binding CollageViewModel.BorderColor.MainColor.BrushColor,UpdateSourceTrigger=PropertyChanged,NotifyOnTargetUpdated=True,NotifyOnSourceUpdated=True}"
+                CornerRadius="{Binding CollageViewModel.CorderRadius,UpdateSourceTrigger=PropertyChanged}" BorderThickness="{Binding CollageViewModel.BorderThikness,UpdateSourceTrigger=PropertyChanged}">
+            <Grid Height="350">
+                <TextBlock HorizontalAlignment="Center" FontSize="32" VerticalAlignment="Center" Text="1" Cursor="Hand"> 
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown" >
+                               <i:InvokeCommandAction  Command="{Binding CollageViewModel.Open}" CommandParameter="i0"  />
+                            </i:EventTrigger>
+                         </i:Interaction.Triggers>
+                    <TextBlock.ToolTip>
+                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[45]}"></TextBlock>
+                    </TextBlock.ToolTip>
+                </TextBlock>
+                <Image Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" 
+                       Source="{Binding CollageViewModel.Images[0],UpdateSourceTrigger=PropertyChanged}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown" >
+                            <i:InvokeCommandAction  Command="{Binding CollageViewModel.Open}" CommandParameter="i0"  />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+            </Grid>
+        </Border>
+        <Border Height="350"
+            BorderBrush="{Binding CollageViewModel.BorderColor.MainColor.BrushColor,UpdateSourceTrigger=PropertyChanged,NotifyOnTargetUpdated=True,NotifyOnSourceUpdated=True}"
+            Grid.Column="1" Margin="-1,0,0,0" CornerRadius="{Binding CollageViewModel.CorderRadius,UpdateSourceTrigger=PropertyChanged}" BorderThickness="{Binding CollageViewModel.BorderThikness,UpdateSourceTrigger=PropertyChanged}">
+            <Grid Height="350">
+                <TextBlock HorizontalAlignment="Center" FontSize="32" VerticalAlignment="Center" Text="2" Cursor="Hand">
+                         <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown" >
+                               <i:InvokeCommandAction  Command="{Binding CollageViewModel.Open}" CommandParameter="i1"  />
+                            </i:EventTrigger>
+                         </i:Interaction.Triggers>
+                    <TextBlock.ToolTip>
+                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[45]}"></TextBlock>
+                    </TextBlock.ToolTip>
+                </TextBlock>
+                <Image Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="0" 
+                           Source="{Binding CollageViewModel.Images[1],UpdateSourceTrigger=PropertyChanged}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown" >
+                            <i:InvokeCommandAction  Command="{Binding CollageViewModel.Open}" CommandParameter="i1"  />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

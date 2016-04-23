@@ -1,0 +1,649 @@
+﻿<UserControl x:Class="PhotoCore1._1.View.TopPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:m="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:tp="clr-namespace:PhotoCore1._1.ViewModels"
+             mc:Ignorable="d" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             d:DesignHeight="130" d:DesignWidth="1280">
+    <Border x:Name="TopBorder" CornerRadius="5" Grid.ColumnSpan="2" BorderBrush="{Binding ColorsViewModel.ThemeColor}" BorderThickness="1" Background="Snow">
+        <Grid Visibility="Visible" Margin="-1,0,0,-1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="31"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="52"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="55"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" BorderBrush="{Binding ColorsViewModel.ThemeColor}" BorderThickness="0.5"></Border>
+            <Border Grid.Row="0" Grid.Column="0" BorderBrush="{Binding ColorsViewModel.ThemeColor}" BorderThickness="0.5">
+                <Button Click="MainButton_Click" Grid.Row="0" Grid.Column="0" BorderBrush="DodgerBlue" BorderThickness="1" Height="25" HorizontalAlignment="Left"  Name="MenuButtonMain" VerticalAlignment="Top" Width="35" Margin="8,3,0,0" >
+                    <Button.Content>
+                        <Image x:Name="MenuButton" Source="..//Resources/Note.png" VerticalAlignment="Center" Width="20" Stretch="Uniform" HorizontalAlignment="Right" Height="20"/>
+                    </Button.Content>
+                    <Button.Background >
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#FFa2adb8" Offset="0"/>
+                            <GradientStop Color="#FF8498a8" Offset="0.3790000081062317"/>
+                            <GradientStop Color="#FF718496" Offset="0.3799999952316284"/>
+                            <GradientStop Color="#FF617583" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.ContextMenu>
+                        <ContextMenu BorderBrush="{Binding ColorsViewModel.ThemeColor}" BorderThickness="1">
+                            <MenuItem Command="{Binding TopPanelViewModel.NewList}" Header="{Binding LangiageViewModel.CurrentLanguage[18]}">
+                                <MenuItem.Icon>
+                                    <Image Margin="5,5,5,5" Height="20" Width="20" Source="../MainPanelIcons/New.png"></Image>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Command="{Binding TopPanelViewModel.Open}"   Header="{Binding LangiageViewModel.CurrentLanguage[5]}">
+                                <MenuItem.Icon>
+                                    <Image Margin="5,5,5,5" Height="20" Width="20" Source="../MainPanelIcons/Open.png"></Image>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Command="{Binding TopPanelViewModel.Save}"  Header="{Binding LangiageViewModel.CurrentLanguage[8]}" >
+                                <MenuItem.Icon>
+                                    <Image Margin="5,5,5,5" Height="20" Width="20" Source="../MainPanelIcons/Save.png"></Image>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Command="{Binding TopPanelViewModel.SaveAs}"  Header="{Binding LangiageViewModel.CurrentLanguage[19]}">
+                                <MenuItem.Icon>
+                                    <Image Margin="5,5,5,5" Height="20" Width="20" Source="../MainPanelIcons/Save.png"></Image>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Command="{Binding TopPanelViewModel.Exit}" Header="{Binding LangiageViewModel.CurrentLanguage[20]}">
+                                <MenuItem.Icon>
+                                    <Image Margin="5,5,5,5" Height="20" Width="20" Source="../MainPanelIcons/Exit.png"></Image>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+            </Border>
+            <TabControl Visibility="Visible" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2">
+                <TabItem IsSelected="{Binding VisibilityPropertiesViewModel.Instance.HomePanelIsSelected,UpdateSourceTrigger=PropertyChanged}" Height="30" Padding="0,-2,0,0" m:ControlsHelper.HeaderFontSize="20" Header="{Binding LangiageViewModel.CurrentLanguage[0]}" Name="Home" Margin="64,3,-65,0">
+                    <Grid Background="Transparent" Margin="0,-5,-5,-2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <RibbonGroup BorderBrush="{Binding ColorsViewModel.ThemeColor}" Grid.Column="0" Name="Function1" Header="{Binding  LangiageViewModel.CurrentLanguage[2]}" Margin="1,1,1,-1" Width="Auto"  >
+                            <Button Command="{Binding TopPanelViewModel.Paste}" Margin="0,2,0,0" Background="Transparent" BorderThickness="0"  Width="Auto" Height="Auto" MaxWidth="58">
+                                <Button.Content>
+                                    <StackPanel>
+                                        <Image Source="../MainPanelIcons/Paste.png" Height="35" Width="35"/>
+                                        <TextBlock FontSize="15" FontFamily="Calibri" FontWeight="Light" HorizontalAlignment="Center" ><Run Text="{Binding LangiageViewModel.CurrentLanguage[3]}"/></TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                                <Button.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[0]}"></TextBlock>
+                                </Button.ToolTip>
+                            </Button>
+                            <Button Command="{Binding TopPanelViewModel.NewList}"  BorderThickness="0" Background="Transparent" Width="Auto" Height="Auto" Margin="4,2,-4,0"  >
+                                <Button.Content>
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <Image Source="../MainPanelIcons/New.png" Height="35" Width="35"></Image>
+                                        <TextBlock FontSize="15" FontFamily="Calibri" FontWeight="Light" HorizontalAlignment="Center" Width="28"><Run Text="{Binding LangiageViewModel.CurrentLanguage[4]}"/></TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                                <Button.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[1]}"></TextBlock>
+                                </Button.ToolTip>
+                            </Button>
+                            <Button Command="{Binding TopPanelViewModel.Open}" Name="Open"  BorderThickness="0" Background="Transparent"  Width="Auto" Height="Auto" Margin="10,2,-10,0"  >
+                                <Button.Content>
+                                    <StackPanel>
+                                        <Image Source="../MainPanelIcons/Open.png" Height="35" Width="35"></Image>
+                                        <TextBlock FontSize="15" FontFamily="Calibri" FontWeight="Light" HorizontalAlignment="Center" MaxWidth="58"><Run Text="{Binding LangiageViewModel.CurrentLanguage[5]}"/></TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                                <Button.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[2]}"></TextBlock>
+                                </Button.ToolTip>
+                            </Button>
+                            <Button Command="{Binding TopPanelViewModel.Copy}" Height="20" Padding="0,0,0,0" x:Name="Copy" BorderThickness="0" Background="Transparent" Width="Auto" MaxWidth="76"  Margin="14,0,10,0" >
+                                <Button.Content>
+                                    <StackPanel  Margin="0,0,5,0" Orientation="Horizontal" Height="25" Width="Auto">
+                                        <Image Margin="5,2,4,2" Source="../Resources/Copy.png" Width="17" />
+                                        <TextBlock FontWeight="Light" Width="Auto" HorizontalAlignment="Center" Margin="0,3,5,3"  FontSize="12" Text="{Binding LangiageViewModel.CurrentLanguage[6]}"></TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                                <Button.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[3]}"></TextBlock>
+                                </Button.ToolTip>
+                            </Button>
+                            <Button Height="20" Padding="0,0,0,0"  Command="{Binding TopPanelViewModel.Cut}" Name="Cut" BorderThickness="0" Background="Transparent"  Width="Auto" MaxWidth="75" Margin="14,0,10,0"  >
+                                <Button.Content>
+                                    <StackPanel  Margin="0,0,5,0" Orientation="Horizontal" Height="25" Width="Auto">
+                                        <Image Margin="5,0,4,0" Source="../Resources/Cut.png" Height="17" ></Image>
+                                        <TextBlock FontWeight="Light" HorizontalAlignment="Center" Margin="0,3,5,0"  FontSize="12" Width="Auto"><Run Text="{Binding LangiageViewModel.CurrentLanguage[7]}"/></TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                                <Button.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[4]}"></TextBlock>
+                                </Button.ToolTip>
+                            </Button>
+                            <Button Command="{Binding TopPanelViewModel.Save}" Height="20" Padding="-10,0,0,0"  BorderThickness="0" Background="Transparent" x:Name="Save"  Width="Auto" MaxWidth="75"   Margin="14,0,10,0"  >
+                                <Button.Content>
+                                    <StackPanel  Margin="10,0,0,0" Orientation="Horizontal" Height="25" Width="Auto">
+                                        <Image Margin="5,0,4,0" Source="../MainPanelIcons/Save.png" Height="17" ></Image>
+                                        <TextBlock FontWeight="Light" FontSize="12" Padding="0,0,0,0" Width="Auto" Margin="0,3,5,3" Text="{Binding LangiageViewModel.CurrentLanguage[8]}"></TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                                <Button.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[5]}"></TextBlock>
+                                </Button.ToolTip>
+                            </Button>
+                        </RibbonGroup>
+                        <RibbonGroup BorderBrush="{Binding ColorsViewModel.ThemeColor}" Grid.Column="1" Header="{Binding LangiageViewModel.CurrentLanguage[13]}" >
+                            <Grid Margin="0,0,5,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition  Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <ToggleButton Unchecked="Select_Piece_Unchecked" Checked="Select_Checked" Margin="2,2,2,7" MaxWidth="73" Grid.RowSpan="3" Name="Select_Piece"  Background="Transparent"  BorderThickness="0"  Width="Auto" Height="Auto"  >
+                                    <ToggleButton.Content>
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <Image Source="../MainPanelIcons/Select.png" Height="35" Width="35"/>
+                                            <TextBlock FontSize="15" FontFamily="Calibri" FontWeight="Light" HorizontalAlignment="Center" Width="Auto"><Run Text="{Binding LangiageViewModel.CurrentLanguage[9]}"/></TextBlock>
+                                        </StackPanel>
+                                    </ToggleButton.Content>
+                                    <ToggleButton.ToolTip>
+                                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[6]}"></TextBlock>
+                                    </ToggleButton.ToolTip>
+                                </ToggleButton>
+                                <Button Click="ResizeOpen_Click" MaxWidth="72" Margin="2,2,5,7" Grid.RowSpan="3" Grid.Column="1" Background="Transparent" Name="Resize"  BorderThickness="0"  Width="Auto" Height="Auto"  >
+                                    <Button.Content>
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <Image Source="../MainPanelIcons/Resize.png" Height="35" Width="32"/>
+                                            <TextBlock FontSize="15" FontFamily="Calibri" FontWeight="Light" HorizontalAlignment="Center" Width="Auto"><Run Text="{Binding LangiageViewModel.CurrentLanguage[10]}"/></TextBlock>
+                                        </StackPanel>
+                                    </Button.Content>
+                                    <Button.ToolTip>
+                                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[7]}"></TextBlock>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button Command="{Binding TopPanelViewModel.RotateRight}" Grid.Row="0" Grid.Column="2" Height="25" Padding="0,0,0,0"  BorderThickness="0" Background="Transparent" Name="RotateRight"  Width="25"    >
+                                    <Button.Content>
+                                        <StackPanel  Margin="0,0,0,0" Orientation="Horizontal" Height="25" Width="25">
+                                            <Image Margin="2.5,0,0,0" Source="../MainPanelIcons/Rot_Right.png" Height="20" ></Image>
+                                        </StackPanel>
+                                    </Button.Content>
+                                    <Button.ToolTip>
+                                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[8]}"></TextBlock>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button Command="{Binding TopPanelViewModel.FlipVertical}" Grid.Row="1" Grid.Column="2" Height="25" Padding="0,0,0,0"  BorderThickness="0" Background="Transparent" Name="FlipVer"  Width="25"    >
+                                    <Button.Content>
+                                        <StackPanel  Margin="0,0,0,0" Orientation="Horizontal" Height="25" Width="25">
+                                            <Image Margin="2.5,0,0,0" Source="../MainPanelIcons/FlipVer.png" Height="20" ></Image>
+                                        </StackPanel>
+                                    </Button.Content>
+                                    <Button.ToolTip>
+                                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[9]}"></TextBlock>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button Command="{Binding TopPanelViewModel.Crop}" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Height="20" Padding="0,0,0,0"  BorderThickness="0" Background="Transparent"  Width="65"   >
+                                    <Button.Content>
+                                        <StackPanel  Margin="0,0,0,0" Orientation="Horizontal" Height="25" Width="55">
+                                            <Image Margin="5,0,4,0" Source="../MainPanelIcons/Crop.png" Height="20" ></Image>
+                                            <TextBlock FontWeight="Light" HorizontalAlignment="Center" Margin="0,3"  FontSize="12" Width="26"><Run Text="{Binding LangiageViewModel.CurrentLanguage[11]}"/></TextBlock>
+                                        </StackPanel>
+                                    </Button.Content>
+                                    <Button.ToolTip>
+                                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[10]}"></TextBlock>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button Command="{Binding TopPanelViewModel.RotateLeft}" Grid.Row="0" Grid.Column="3" Height="25" Padding="0,0,0,0"  BorderThickness="0" Background="Transparent" Name="RotateLeft" Width="25"    >
+                                    <Button.Content>
+                                        <StackPanel  Margin="0,0,0,0" Orientation="Horizontal" Height="25" Width="25">
+                                            <Image Margin="2.5,0,0,0" Source="../MainPanelIcons/Rot_Left.png" Height="20" ></Image>
+                                        </StackPanel>
+                                    </Button.Content>
+                                    <Button.ToolTip>
+                                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[11]}"></TextBlock>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button Command="{Binding TopPanelViewModel.FlipHorizontal}" Grid.Row="1" Grid.Column="3" Height="25" Padding="0,0,0,0"  BorderThickness="0" Background="Transparent" Name="FlipHor"   Width="25"    >
+                                    <Button.Content>
+                                        <StackPanel  Margin="0,0,0,0" Orientation="Horizontal" Height="25" Width="25">
+                                            <Image Margin="2.5,0,0,0" Source="../MainPanelIcons/FlipHor.png" Height="20" ></Image>
+                                        </StackPanel>
+                                    </Button.Content>
+                                    <Button.ToolTip>
+                                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[12]}"></TextBlock>
+                                    </Button.ToolTip>
+                                </Button>
+                            </Grid>
+                        </RibbonGroup>
+                        <RibbonGroup Visibility="Visible" Header="{Binding LangiageViewModel.CurrentLanguage[14]}" Grid.Column="2" BorderBrush="{Binding ColorsViewModel.ThemeColor}">
+                            <ToggleButton Checked="ChPic" Unchecked="Picker_Unchecked" Margin="10,5,5,5" Grid.Row="1" Grid.Column="2" Height="20" Padding="0,0,0,0"  BorderThickness="0" Background="Transparent" Name="Picker" Width="25"  >
+                                <ToggleButton.Content>
+                                    <StackPanel  Margin="0,0,0,0" Orientation="Horizontal" Height="25" Width="25">
+                                        <Image Margin="0,0,0,0" Source="../MainPanelIcons/Picker.png" Height="25" ></Image>
+                                    </StackPanel>
+                                </ToggleButton.Content>
+                                <ToggleButton.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[13]}"></TextBlock>
+                                </ToggleButton.ToolTip>
+                            </ToggleButton>
+                            <ToggleButton Unchecked="Drawbut_Unchecked" Checked="Drawbut_Checked"  Margin="10,5,5,5" Grid.Row="1" Grid.Column="2" Height="20" Padding="0,0,0,0"  BorderThickness="0" Background="Transparent"  Name="Drawbut"  Width="25"    >
+                                <ToggleButton.Content>
+                                    <StackPanel  Margin="0,0,0,0" Orientation="Horizontal" Height="25" Width="25">
+                                        <Image Margin="0,0,0,0" Source="../MainPanelIcons/Pen.png" Height="25" ></Image>
+                                    </StackPanel>
+                                </ToggleButton.Content>
+                                <ToggleButton.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[14]}"></TextBlock>
+                                </ToggleButton.ToolTip>
+                            </ToggleButton>
+                            <ToggleButton Unchecked="Text_Unchecked" Checked="TextButtonChecked" Margin="5,5,10,5" Grid.Row="1" Grid.Column="2" Height="25" Padding="0,0,0,0"  BorderThickness="0" Background="Transparent" Name="Text"  Width="25"    >
+                                <ToggleButton.Content>
+                                    <StackPanel  Margin="0,0,0,0" Orientation="Horizontal" Height="25" Width="25">
+                                        <Image Margin="0,0,0,0" Source="../MainPanelIcons/Text.png" Height="25" ></Image>
+                                    </StackPanel>
+                                </ToggleButton.Content>
+                                <ToggleButton.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[15]}"></TextBlock>
+                                </ToggleButton.ToolTip>
+                            </ToggleButton>
+                            <ToggleButton Checked="Eraser_Checked" Unchecked="Eraser_Unchecked" Margin="5,5,10,5" Grid.Row="1" Name="Eraser" Grid.Column="2" Height="25" Padding="0,0,0,0"  BorderThickness="0" Background="Transparent"   Width="25"    >
+                                <ToggleButton.Content>
+                                    <StackPanel  Margin="0,0,0,0" Orientation="Horizontal" Height="25" Width="25">
+                                        <Image Margin="0,0,0,0" Source="../MainPanelIcons/Eraser.png" Height="25" ></Image>
+                                    </StackPanel>
+                                </ToggleButton.Content>
+                                <ToggleButton.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[16]}"></TextBlock>
+                                </ToggleButton.ToolTip>
+                            </ToggleButton>
+                        </RibbonGroup>
+                        <RibbonGroup Header="{Binding LangiageViewModel.CurrentLanguage[15]}" Grid.Column="3" BorderBrush="{Binding ColorsViewModel.ThemeColor}">
+                            <Button Click="MainButton_Click" Background="LightGray"  BorderThickness="0" Height="45" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="35"  Margin="5,10,5,-5" >
+                                <Button.Content>
+                                    <Image Margin="0,0,-5,10" Source="../MainPanelIcons/ThiknessAll.png" VerticalAlignment="Center" Width="35" HorizontalAlignment="Right" Height="35"/>
+                                </Button.Content>
+                                <Button.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[17]}"></TextBlock>
+                                </Button.ToolTip>
+                                <Button.ContextMenu>
+                                    <ContextMenu BorderBrush="{Binding ColorsViewModel.ThemeColor}" BorderThickness="1" Width="52">
+                                        <MenuItem x:Name="TH1" Click="ThicknessChoose">
+                                            <MenuItem.Icon>
+                                                <Image  Height="10" Width="40" Source="../MainPanelIcons/Thikness1.png"></Image>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem x:Name="TH2"  Click="ThicknessChoose">
+                                            <MenuItem.Icon>
+                                                <Image Height="10" Width="40" Source="../MainPanelIcons/Thikness2.png"></Image>
+                                            </MenuItem.Icon>
+                                        </MenuItem >
+                                        <MenuItem  Click="ThicknessChoose"  x:Name="TH3">
+                                            <MenuItem.Icon>
+                                                <Image Height="10" Width="40" Source="../MainPanelIcons/Thikness3.png"></Image>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem x:Name="TH4"  Click="ThicknessChoose">
+                                            <MenuItem.Icon>
+                                                <Image Height="10" Width="40" Source="../MainPanelIcons/Thikness4.png"></Image>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                    </ContextMenu>
+                                </Button.ContextMenu>
+                            </Button>
+                        </RibbonGroup>
+                        <RibbonGroup Header="{Binding LangiageViewModel.CurrentLanguage[16]}" BorderBrush="{Binding ColorsViewModel.ThemeColor}" Grid.Column="4">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5,0,0" Height="Auto">
+                                    <Rectangle  x:Name="RecCol" Fill="{Binding ColorsViewModel.MainColor.BrushColor,UpdateSourceTrigger=PropertyChanged,NotifyOnTargetUpdated=True,NotifyOnSourceUpdated=True}" Width="40" Height="40" Stroke="Gainsboro" StrokeThickness="2" Margin="10,10,10,10">
+                                        <Rectangle.ToolTip>
+                                            <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[18]}"></TextBlock>
+                                        </Rectangle.ToolTip>
+                                    </Rectangle>
+                                <ListView  x:Name="ListViewNames" BorderBrush="Transparent"    SizeChanged="ListViewNames_SizeChanged"
+                                      ItemsSource="{Binding ColorsViewModel.Colors,Mode=OneWay,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged}"
+                                          SelectedItem="{Binding ColorsViewModel.MainColor,UpdateSourceTrigger=PropertyChanged}"
+                                          ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                          ScrollViewer.HorizontalScrollBarVisibility="Hidden" Width="Auto" Height="Auto"
+                                           SelectionChanged="ListViewNames_SelectionChanged">
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="Margin" Value="1"/>
+                                            <Setter Property="Padding" Value="1"/>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="3" Background="LightGray"></UniformGrid>
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Rectangle Fill="{Binding BrushColor}"  Height="15" Width="15">
+                                                <Rectangle.ToolTip>
+                                                    <TextBlock Text="{Binding ColorM.Name}"></TextBlock>
+                                                </Rectangle.ToolTip>
+                                            </Rectangle>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>            
+                                </ListView>
+                            </StackPanel>
+                            <Button Command="{Binding ColorsViewModel.SelectColor}"  Grid.RowSpan="3" Background="Transparent"  BorderThickness="0"  Width="Auto" MaxWidth="54" Height="62" Margin="5,5,5,-5" >
+                                <Button.Content>
+                                    <StackPanel HorizontalAlignment="Center" Height="Auto">
+                                        <Image Source="../MainPanelIcons/Edit Color.png" Height="35" Width="35"/>
+                                        <TextBlock FontSize="14" FontFamily="Calibri" FontWeight="Light" HorizontalAlignment="Center" Width="Auto" Height="18" Text="{Binding LangiageViewModel.CurrentLanguage[12]}"></TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                                <Button.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[19]}"></TextBlock>
+                                </Button.ToolTip>
+                            </Button>
+                        </RibbonGroup>
+                    </Grid>
+                </TabItem>
+                <TabItem Height="30" IsSelected="{Binding VisibilityPropertiesViewModel.Instance.TextPanelIsSelected,UpdateSourceTrigger=PropertyChanged}" Padding="0,-2,0,0" m:ControlsHelper.HeaderFontSize="20" Name="TextPanel" Header="{Binding LangiageViewModel.CurrentLanguage[1]}" Margin="70,3,-77,0">
+                    <Grid Background="Transparent" Margin="-5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <RibbonGroup BorderBrush="{Binding ColorsViewModel.ThemeColor}" BorderThickness="1" Header="{Binding LangiageViewModel.CurrentLanguage[21]}" Grid.Column="0" Margin="1,1,0,1">
+                            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="0,30,0,0">
+                            <ComboBox Height="20"  SelectedValue="{Binding TopPanelViewModel.FontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                      ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}" Name="Type_Font"   Width="120" Margin="20,0,10,0">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock FontFamily="{Binding .}" Text="{Binding Source}" FontSize="15"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                    <ComboBox.ToolTip>
+                                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[25]}"></TextBlock>
+                                    </ComboBox.ToolTip>
+                            </ComboBox>
+                                <ComboBox Height="20" Name="Font_Size"  Margin="10,0,10,0" SelectedValue="{Binding TopPanelViewModel.FontSize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                          ItemsSource="{Binding StaticCollectionBind.Instance.FontSize}">
+                                    <ComboBox.ToolTip>
+                                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[24]}"></TextBlock>
+                                    </ComboBox.ToolTip>
+                            </ComboBox>
+                            <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Height="25" Canvas.Left="128" Canvas.Top="5" RenderTransformOrigin="2.16,0.52" Width="Auto" Margin="10,0,10,0">
+                                    <ToggleButton Unchecked="Bold_Unchecked" Checked="Bold_Checked" Margin="0,0,5,0" Grid.Row="0" Grid.Column="3" Height="25" Padding="0,0,0,0"  BorderThickness="0" Background="Transparent" x:Name="Bold"  Width="25"    >
+                                        <ToggleButton.Content>
+                                            <StackPanel  Margin="0,0,0,0" Orientation="Horizontal" Height="25" Width="25">
+                                                <Image Margin="2.5,0,0,0" Source="../MainPanelIcons/Bold.png"  Height="20" ></Image>
+                                            </StackPanel>
+                                        </ToggleButton.Content>
+                                        <ToggleButton.ToolTip>
+                                            <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[20]}"></TextBlock>
+                                        </ToggleButton.ToolTip>
+                                    </ToggleButton>
+                                    <ToggleButton Checked="Italic_Checked" Unchecked="Italic_Unchecked" Margin="0,0,5,0" Grid.Row="0" Grid.Column="3" Height="25" Padding="0,0,0,0"  BorderThickness="0" Background="Transparent" x:Name="Italic" Width="25"    >
+                                        <ToggleButton.Content>
+                                            <StackPanel  Margin="0,0,0,0" Orientation="Horizontal" Height="25" Width="25">
+                                                <Image Margin="2.5,0,0,0" Source="../MainPanelIcons/Italic.png"  Height="20" ></Image>
+                                            </StackPanel>
+                                        </ToggleButton.Content>
+                                        <ToggleButton.ToolTip>
+                                            <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[21]}"></TextBlock>
+                                        </ToggleButton.ToolTip>
+                                    </ToggleButton>
+                                    <ToggleButton Checked="Underline_Checked" Unchecked="Underline_Unchecked" Margin="0,0,5,0" Grid.Row="0" Grid.Column="3" Height="25" Padding="0,0,0,0"  BorderThickness="0" Background="Transparent" x:Name="Underline" Width="25"    >
+                                        <ToggleButton.Content>
+                                            <StackPanel  Margin="0,0,0,0" Orientation="Horizontal" Height="25" Width="25">
+                                                <Image Margin="2.5,0,0,0" Source="../MainPanelIcons/Underline.png"  Height="20" ></Image>
+                                            </StackPanel>
+                                        </ToggleButton.Content>
+                                        <ToggleButton.ToolTip>
+                                            <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[22]}"></TextBlock>
+                                        </ToggleButton.ToolTip>
+                                    </ToggleButton>
+                                <ToggleButton Checked="Strikeout_Checked" Unchecked="Strikeout_Unchecked" Grid.Row="0" Grid.Column="3" Height="25" Padding="0,0,0,0"  BorderThickness="0" Background="Transparent" x:Name="Strikeout"   Width="25"    >
+                                    <ToggleButton.Content>
+                                        <StackPanel  Margin="0,0,0,0" Orientation="Horizontal" Height="25" Width="25">
+                                            <Image Margin="2.5,0,0,0" Source="../MainPanelIcons/Strikeout.png"  Height="20" ></Image>
+                                        </StackPanel>
+                                        </ToggleButton.Content>
+                                        <ToggleButton.ToolTip>
+                                            <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[23]}"></TextBlock>
+                                        </ToggleButton.ToolTip>
+                                    </ToggleButton>
+                            </StackPanel>
+                            </StackPanel>
+                        </RibbonGroup>
+                        <RibbonGroup Header="{Binding LangiageViewModel.CurrentLanguage[16]}" BorderBrush="{Binding ColorsViewModel.ThemeColor}" Grid.Column="2">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,7,0,0" Height="Auto">
+                                <Rectangle  Fill="{Binding ColorsViewModel.MainColor.BrushColor}" Width="40" Height="40" Stroke="Gainsboro" StrokeThickness="2" Margin="10,10,10,10">
+                                    <Rectangle.ToolTip>
+                                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[18]}"></TextBlock>
+                                    </Rectangle.ToolTip>
+                                </Rectangle>
+                                <ListView  x:Name="ListViewNames1" BorderBrush="Transparent" 
+                                      ItemsSource="{Binding ColorsViewModel.Colors}"
+                                          SelectedItem="{Binding ColorsViewModel.MainColor}"
+                                          ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                          ScrollViewer.HorizontalScrollBarVisibility="Hidden" Width="Auto" Height="Auto">
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="Margin" Value="1"/>
+                                            <Setter Property="Padding" Value="1"/>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="3" Background="LightGray"></UniformGrid>
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Rectangle Fill="{Binding BrushColor}"  Height="15" Width="15">
+                                                <Rectangle.ToolTip>
+                                                    <TextBlock Text="{Binding ColorM.Name}"></TextBlock>
+                                                </Rectangle.ToolTip>
+                                            </Rectangle>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+                            <Button Command="{Binding ColorsViewModel.SelectColor}"  Grid.RowSpan="3" Background="Transparent"  BorderThickness="0"  Width="Auto" MaxWidth="52" Height="62" Margin="5,7,5,-5" >
+                                <Button.Content>
+                                    <StackPanel HorizontalAlignment="Center" Height="Auto">
+                                        <Image Source="../MainPanelIcons/Edit Color.png" Height="35" Width="35"/>
+                                        <TextBlock FontSize="14" FontFamily="Calibri" FontWeight="Light" HorizontalAlignment="Center" Width="Auto" Height="18" Text="{Binding LangiageViewModel.CurrentLanguage[12]}"></TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                                <Button.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[19]}"></TextBlock>
+                                </Button.ToolTip>
+                            </Button>
+                        </RibbonGroup>
+                    </Grid>
+                </TabItem>
+                <TabItem Height="30" Padding="0,-2,0,0" m:ControlsHelper.HeaderFontSize="20" Header="{Binding LangiageViewModel.CurrentLanguage[2]}" Margin="80,3,-80,0">
+                    <Grid Margin="-5,-2,0,-5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="278"></ColumnDefinition>
+                            <ColumnDefinition Width="935"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <RibbonGroup Header="{Binding LangiageViewModel.CurrentLanguage[2]}" BorderBrush="{Binding ColorsViewModel.ThemeColor}" BorderThickness="1" Margin="1,1,0,1">
+                            <Button Background="Transparent" Click="Library_Open"  BorderThickness="0"  Width="Auto" Height="Auto" Margin="0,0,0,0"  >
+                                <Button.Content>
+                                    <StackPanel>
+                                        <Image Source="../MainPanelIcons/Library.png" Height="35" Width="35"/>
+                                        <TextBlock Text="{Binding LangiageViewModel.CurrentLanguage[22]}" FontSize="15" FontFamily="Calibri" FontWeight="Light" HorizontalAlignment="Center" Width="Auto"></TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                                <Button.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[26]}"></TextBlock>
+                                </Button.ToolTip>
+                            </Button>
+                            <Button Margin="10,0,0,0" Click="Capture_Click"  Background="Transparent"  BorderThickness="0"  Width="Auto" Height="Auto"   >
+                                <Button.Content>
+                                    <StackPanel>
+                                        <Image Source="../MainPanelIcons/Capture.png" Height="35" Width="35"/>
+                                        <TextBlock FontSize="15" FontFamily="Calibri" FontWeight="Light" HorizontalAlignment="Center" Width="Auto"><Run Text="{Binding LangiageViewModel.CurrentLanguage[23]}"/></TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                                <Button.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[27]}"></TextBlock>
+                                </Button.ToolTip>
+                            </Button>
+                            <Button Background="Transparent" Click="Button_Click" BorderThickness="0"  Width="Auto" Height="Auto" Margin="10,0,0,0"  >
+                                <Button.Content>
+                                    <StackPanel>
+                                        <Image Source="../MainPanelIcons/Capture.png" Height="35" Width="35"/>
+                                        <TextBlock FontSize="15" FontFamily="Calibri" FontWeight="Light" HorizontalAlignment="Center" Width="Auto"><Run Text="{Binding LangiageViewModel.CurrentLanguage[24]}"/></TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                                <Button.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[28]}"></TextBlock>
+                                </Button.ToolTip>
+                            </Button>
+                            <Button Background="Transparent" Click="CreateCollage_Click" BorderThickness="0"  Width="Auto" Height="Auto" Margin="10,0,0,0"  >
+                                <Button.Content>
+                                    <StackPanel>
+                                        <Image Source="../MainPanelIcons/Collage.png" Height="35" Width="35"/>
+                                        <TextBlock FontSize="15" FontFamily="Calibri" FontWeight="Light" HorizontalAlignment="Center" Width="Auto"><Run Text="{Binding LangiageViewModel.CurrentLanguage[25]}"/></TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                                <Button.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[29]}"></TextBlock>
+                                </Button.ToolTip>
+                            </Button>
+                        </RibbonGroup>
+                        <RibbonGroup Header="{Binding LangiageViewModel.CurrentLanguage[29]}" BorderBrush="{Binding ColorsViewModel.ThemeColor}" BorderThickness="1" Grid.Column="1" Margin="1,1,624,1">
+                            <Button Click="Frames_Click" Background="Transparent"  BorderThickness="0"  Width="Auto" Height="Auto" Margin="10,0,0,0"  >
+                                <Button.Content>
+                                    <StackPanel>
+                                        <Image Source="../MainPanelIcons/Frames.png" Height="35" Width="35"/>
+                                        <TextBlock FontSize="15" FontFamily="Calibri" FontWeight="Light" HorizontalAlignment="Center" Width="Auto"><Run Text="{Binding LangiageViewModel.CurrentLanguage[26]}"/></TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                                <Button.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[30]}"></TextBlock>
+                                </Button.ToolTip>
+                            </Button>
+                            <ToggleButton Name="FrameVisualState" IsChecked="{Binding VisibilityPropertiesViewModel.FrameVisibility}" Background="Transparent" BorderThickness="0"  Width="Auto" Height="Auto" Margin="10,0,0,0"  >
+                                <ToggleButton.Content>
+                                    <StackPanel>
+                                        <Image Source="../MainPanelIcons/Visible.png" Height="35" Width="35"/>
+                                        <TextBlock FontSize="15" FontFamily="Calibri" FontWeight="Light" HorizontalAlignment="Center" Width="Auto"><Run Text="{Binding LangiageViewModel.CurrentLanguage[27]}"/></TextBlock>
+                                    </StackPanel>
+                                </ToggleButton.Content>
+                                <ToggleButton.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[31]}"></TextBlock>
+                                </ToggleButton.ToolTip>
+                            </ToggleButton>
+                            <Button Background="Transparent" Command="{Binding TopPanelViewModel.RemoveFrame}"  BorderThickness="0"  Width="Auto" Height="Auto" Margin="10,0,0,0"  >
+                                <Button.Content>
+                                    <StackPanel>
+                                        <Image Source="../MainPanelIcons/Remove.png" Height="35" Width="35"/>
+                                        <TextBlock FontSize="15" FontFamily="Calibri" FontWeight="Light" HorizontalAlignment="Center" Width="Auto" FontStretch="UltraExpanded"><Run Text="{Binding LangiageViewModel.CurrentLanguage[28]}"/></TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                                <Button.ToolTip>
+                                    <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[32]}"></TextBlock>
+                                </Button.ToolTip>
+                            </Button>
+                        </RibbonGroup>
+                    </Grid>
+                </TabItem>
+                <TabItem Height="30" Padding="0,-2,0,0" m:ControlsHelper.HeaderFontSize="20" Header="{Binding LangiageViewModel.CurrentLanguage[31]}" Margin="87,3,-90,0">
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition  Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <RibbonGroup BorderThickness="1" BorderBrush="{Binding ColorsViewModel.ThemeColor}" Header="{Binding LangiageViewModel.CurrentLanguage[32]}">
+                            <ListView  BorderBrush="Transparent"    SizeChanged="ListViewNames_SizeChanged" x:Name="ThemesWindowsListView"
+                                   Height="37" Margin="30,13,30,0" 
+                                       SelectionChanged="ListView_SelectionChanged"
+                                   ItemsSource="{Binding OptionsVModel.Colors,Mode=OneWay,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged}"
+                                   SelectedItem="{Binding OptionsVModel.SelectedColor,UpdateSourceTrigger=PropertyChanged}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Margin" Value="1"/>
+                                    <Setter Property="Padding" Value="1"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Background="Transparent" Orientation="Horizontal"></StackPanel>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Rectangle Fill="{Binding BrushColor}"  Height="30" Width="30">
+                                        <Rectangle.ToolTip>
+                                            <TextBlock Text="{Binding ColorM.Name}"></TextBlock>
+                                        </Rectangle.ToolTip>
+                                    </Rectangle>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        </RibbonGroup>
+                        <RibbonGroup Width="Auto" VerticalContentAlignment="Center" VerticalAlignment="Center" Grid.Column="1" BorderThickness="1" BorderBrush="{Binding ColorsViewModel.ThemeColor}" Header="{Binding LangiageViewModel.CurrentLanguage[96]}">
+                            <StackPanel Margin="30,0,30,0" Orientation="Horizontal" VerticalAlignment="Center">
+                                <Button Command="{Binding LangiageViewModel.ChangeLanguageAE }" Margin="10,0,0,0" VerticalAlignment="Center" BorderThickness="0">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Height="30" Width="30" Source="..//MainPanelIcons/English.png"></Image>
+                                            <TextBlock VerticalAlignment="Center" FontSize="17" FontWeight="Light" Margin="5,0,0,0">English</TextBlock>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                                <Button Command="{Binding LangiageViewModel.ChangeLanguageBG}" Margin="10,0,0,0" VerticalAlignment="Center" BorderThickness="0">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Height="30" Width="30" Source="..//MainPanelIcons/Bulgaria.png"></Image>
+                                            <TextBlock Margin="5,0,0,0" FontSize="17" FontWeight="Light" VerticalAlignment="Center">Български</TextBlock>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
+                        </RibbonGroup>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" >
+                <Button Command="{Binding TopPanelViewModel.Undo,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,3,0" Grid.Row="0" Grid.Column="3" Height="25" Padding="0,0,0,0"  BorderThickness="0" Background="Transparent"  Width="25"    >
+                    <Button.Content>
+                        <StackPanel  Margin="0,0,0,0" Orientation="Horizontal" Height="25" Width="25">
+                            <Image Margin="2.5,0,0,0" Source="../MainPanelIcons/Undo.png" Height="20" ></Image>
+                        </StackPanel>
+                    </Button.Content>
+                    <Button.ToolTip>
+                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[33]}"></TextBlock>
+                    </Button.ToolTip>
+                </Button>
+                <Button Command="{Binding TopPanelViewModel.Redo,UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="3" Height="25" Padding="0,0,0,0"  BorderThickness="0" Background="Transparent"   Width="25"    >
+                    <Button.Content>
+                        <StackPanel  Margin="0,0,0,0" Orientation="Horizontal" Height="25" Width="25">
+                            <Image Margin="2.5,2,0,3" Source="../MainPanelIcons/Redo.png" Height="20" />
+                        </StackPanel>
+                    </Button.Content>
+                    <Button.ToolTip>
+                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[34]}"></TextBlock>
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,113 @@
+﻿<UserControl x:Class="PhotoCore1._1.View.RightPanel.FourPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style  TargetType="Button" x:Key="EfBut">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Canvas Height="80" Width="80" >
+                            <Border x:Name="smb" CornerRadius="1" BorderBrush="Black" BorderThickness="2" Height="60">
+                                <Image x:Name="sm"  VerticalAlignment="Top" HorizontalAlignment="Left" Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Height="55" Width="74"/>
+                            </Border>
+                            <StackPanel   Canvas.Bottom="2" Height="17" Width="76">
+                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <TextBlock  x:Name="smt" Canvas.Bottom="2" Canvas.Left="20" Canvas.Top="62" Text="{TemplateBinding Content}"   RenderTransformOrigin="0.5,0.5">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="true">
+                                                        <Setter  Property="Background" Value="Silver"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Canvas>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter  Property="Background" Value="LightBlue"/>
+                    <Setter  Property="Opacity" Value="0.8"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" Value="BurlyWood"/>
+                    <Setter Property="Opacity" Value="0.3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style >
+    </UserControl.Resources>
+    <Grid Margin="-2,-2,-2,-2" Background="SeaShell" Height="Auto" Width="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="27"></RowDefinition>
+        </Grid.RowDefinitions>
+        <UniformGrid Height="Auto" Grid.Row="0"  Columns="2" Background="SeaShell" Name="MainButtons" Visibility="Visible"  Width="Auto" Grid.ColumnSpan="2">
+            <Button Style="{StaticResource EfBut}" Click="Posterization_Click" Height="80" Width="80" Content="{Binding LangiageViewModel.CurrentLanguage[90]}" Tag="../..//RightPanelIcons/Posterization.png"  Margin="5,5,5,5"></Button>
+            <Button Style="{StaticResource EfBut}" Command="{Binding FourPageEffects.Transperenty}" Height="80" Width="80" Content="{Binding LangiageViewModel.CurrentLanguage[91]}" Tag="../..//RightPanelIcons/Transparanty.png"  Margin="5,5,5,5"></Button>
+            <Button Style="{StaticResource EfBut}" Click="Monochrome_Click" Height="80" Width="80" Content="{Binding LangiageViewModel.CurrentLanguage[92]}" Tag="../..//RightPanelIcons/Monochrome.png" Margin="5,5,5,5"></Button>
+            <Button Style="{StaticResource EfBut}" Click="Solarise_Click" Height="80" Width="80" Content="{Binding LangiageViewModel.CurrentLanguage[93]}" Tag="../..//RightPanelIcons/Solarise.png" Margin="5,5,5,5"></Button>
+            <Button Style="{StaticResource EfBut}" Click="Warp_Click" Height="80" Width="80" Content="{Binding LangiageViewModel.CurrentLanguage[94]}" Tag="../..//RightPanelIcons/Warp.png" Margin="5,5,5,5"></Button>
+        </UniformGrid>
+        <Button Command="{Binding FourPageEffects.Back}" Click="Back_Click" Height="20" Padding="1,1,1,1" BorderThickness="0" Visibility="Hidden"  Name="Back"  HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Button.Content>
+                <Image Source="../..//Resources/Back.png"></Image>
+            </Button.Content>
+        </Button>
+        <StackPanel Name="PosterizationPanel" Visibility="Hidden" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <TextBlock FontWeight="Bold"  Margin="0,80,0,0" HorizontalAlignment="Center" Text="{Binding LangiageViewModel.CurrentLanguage[55]}"></TextBlock>
+            <Button Margin="0,80,0,0" HorizontalAlignment="Center" Command="{Binding FourPageEffects.Posterization}" x:Name="Posterization"  Content="{Binding LangiageViewModel.CurrentLanguage[51]}" Height="22" Width="80" RenderTransformOrigin="0.458,3.682" Canvas.Left="85" Canvas.Top="189"/>
+        </StackPanel>
+        <StackPanel Name="MonochromePanel" Visibility="Hidden" Grid.ColumnSpan="2">
+            <TextBlock FontWeight="Bold"  Margin="0,80,0,0" HorizontalAlignment="Center" Text="{Binding LangiageViewModel.CurrentLanguage[55]}"></TextBlock>
+            <Button  Margin="0,80,0,0" HorizontalAlignment="Center" x:Name="MonochromeApply" Command="{Binding FourPageEffects.Monochrome}" Content="{Binding LangiageViewModel.CurrentLanguage[51]}" Height="22" Width="80" RenderTransformOrigin="0.458,3.682" Canvas.Left="80" Canvas.Top="190"/>
+        </StackPanel>
+        <StackPanel Name="WarpPanel" Visibility="Hidden" Grid.ColumnSpan="2">
+            <TextBlock FontWeight="Bold"  Margin="0,80,0,0" HorizontalAlignment="Center" Text="{Binding LangiageViewModel.CurrentLanguage[55]}"></TextBlock>
+            <Button Margin="0,80,0,0" HorizontalAlignment="Center" x:Name="WarpApply" Command="{Binding FourPageEffects.Warp}" Content="{Binding LangiageViewModel.CurrentLanguage[51]}" Height="22" Width="80" RenderTransformOrigin="0.458,3.682" Canvas.Left="88" Canvas.Top="188"/>
+        </StackPanel>
+        <StackPanel Name="SolarControl" Visibility="Hidden" HorizontalAlignment="Center">
+            <TextBlock Margin="0,100,0,0" HorizontalAlignment="Center"  Background="Transparent" Width="Auto" Height="25" Text="{Binding LangiageViewModel.CurrentLanguage[52]}"></TextBlock>
+            <Slider Margin="0,5,0,0" TickFrequency="10" x:Name="RedSliderSolar"  Width="100" Height="23"  Value="{Binding FourPageEffects.Red,UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="255" Canvas.Left="78" Canvas.Top="117">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="ValueChanged" >
+                        <i:InvokeCommandAction  Command="{Binding FourPageEffects.ChangeSolar,UpdateSourceTrigger=PropertyChanged}"   />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Slider>
+            <TextBlock Margin="0,10,0,0"  HorizontalAlignment="Center"  Background="Transparent" Width="Auto" Height="25" Canvas.Left="40" Canvas.Top="117" Text="{Binding LangiageViewModel.CurrentLanguage[53]}"></TextBlock>
+            <Slider  Margin="0,5,0,0"  x:Name="GreenSliderSolar"  Width="100" Height="23" Value="{Binding FourPageEffects.Green,UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="255" Canvas.Left="78" Canvas.Top="149">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="ValueChanged" >
+                        <i:InvokeCommandAction  Command="{Binding FourPageEffects.ChangeSolar,UpdateSourceTrigger=PropertyChanged}"   />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Slider>
+            <TextBlock  Margin="0,10,0,0"  HorizontalAlignment="Center"  Background="Transparent" Width="Auto" Height="25" Canvas.Left="40" Canvas.Top="117" Text="{Binding LangiageViewModel.CurrentLanguage[54]}"></TextBlock>
+            <Slider  Margin="0,5,0,0"  x:Name="BlueSliderSolar"  Width="100" Height="23"  Value="{Binding FourPageEffects.Blue,UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="255" Canvas.Left="78" Canvas.Top="179">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="ValueChanged" >
+                        <i:InvokeCommandAction  Command="{Binding FourPageEffects.ChangeSolar,UpdateSourceTrigger=PropertyChanged}"   />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Slider>
+            <Button  Margin="0,15,0,0"  x:Name="Solar"  Command="{Binding FourPageEffects.SetSolar,UpdateSourceTrigger=PropertyChanged}"  Content="{Binding LangiageViewModel.CurrentLanguage[51]}" Height="22" Width="80" Canvas.Left="51" Canvas.Top="221"/>
+        </StackPanel>
+        <StackPanel Margin="0,110,0,0" HorizontalAlignment="Center" x:Name="PartImageButtons"  Visibility="Hidden">
+            <RadioButton Name="WholeImageGr"  IsChecked="True" Content="{Binding LangiageViewModel.CurrentLanguage[59]}"
+                                 Width="Auto" Height="20" GroupName="ImagePart1" ></RadioButton>
+            <RadioButton Name="PartImageGr"  IsChecked="{Binding FourPageEffects.PartArea,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         Unchecked="Part_Unchecked" Content="{Binding LangiageViewModel.CurrentLanguage[60]}"
+                                 Width="Auto" Height="20" GroupName="ImagePart1" ></RadioButton>
+        </StackPanel>
+    </Grid>
+</UserControl>

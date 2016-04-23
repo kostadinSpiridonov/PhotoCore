@@ -1,0 +1,98 @@
+﻿<Controls:MetroWindow x:Class="PhotoCore1._1.View.Library"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:conv="clr-namespace:PhotoCore1._1.Converters"
+        Icon="..//MainPanelIcons/Library.png" 
+        IgnoreTaskbarOnMaximize="False"
+        xmlns:vm="clr-namespace:PhotoCore1._1.ViewModels"
+        Title="Library" 
+        BorderBrush="{Binding ColorsViewModel.ThemeColor}"
+        BorderThickness="1" 
+       Height="720" Width="1280"  
+                       PreviewKeyDown="KeyCombinations"
+                           MinHeight="500"
+                           MinWidth="1000"
+        WindowState="Maximized">
+    <Window.Resources>
+        <Style  TargetType="Button" x:Key="CloseFullScreen">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Image x:Name="sm" Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Opacity" Value="0.6"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Opacity" Value="1"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style >
+    </Window.Resources>
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Visibility="Visible">
+            <UniformGrid Columns="4"   Name="Second" Margin="1,1,1,1">
+            </UniformGrid>
+        </ScrollViewer>
+        <StackPanel Name="First" Visibility="Hidden">
+            <Grid Height="600" VerticalAlignment="Top" Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="305"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="305"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Margin="5,0,0,0" Click="Back_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="40" Style="{StaticResource CloseFullScreen}" Visibility="Visible" Tag="..//Resources/Back.png" >
+                    <Button.ToolTip>
+                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[41]}"></TextBlock>
+                    </Button.ToolTip>
+                </Button>
+                <Image Grid.Row="1" Grid.Column="0" Name="ImageLeft"  Width="250" Height="250" Source="{Binding LibraryViewModel.LeftImage,UpdateSourceTrigger=PropertyChanged}"></Image>
+                <Image Grid.Row="1" Grid.Column="1" Name="ImageShow" HorizontalAlignment="Center" Source="{Binding LibraryViewModel.BaseImage,UpdateSourceTrigger=PropertyChanged}" Height="540" Stretch="Uniform"></Image>
+                <Image Grid.Row="1" Grid.Column="2" Name="ImageRigth" Width="250" Height="250" Source="{Binding LibraryViewModel.RightImage,UpdateSourceTrigger=PropertyChanged}"></Image>
+            </Grid>
+            <Rectangle Height="1" Fill="{Binding ColorsViewModel.ThemeColor}"></Rectangle>
+            <StackPanel Height="110" Background="Transparent" Orientation="Horizontal">
+                <StackPanel Margin="0,0,0,15" Orientation="Horizontal">
+                    <Button Command="{Binding LibraryViewModel.OpenInEditor}" Click="Close_This"  Margin="20,0,0,0" Style="{StaticResource CloseFullScreen}" Tag="..//Resources/Edit.png"  Width="60" Height="60">
+                        <Button.ToolTip>
+                            <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[35]}"></TextBlock>
+                    </Button.ToolTip>
+                </Button>
+                    <Button Command="{Binding LibraryViewModel.SaveThis}" Margin="320,0,0,0" Style="{StaticResource CloseFullScreen}" Tag="..//Resources/SaveOne.png"   Width="60" Height="60" Content="Save">
+                    <Button.ToolTip>
+                            <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[36]}"></TextBlock>
+                        </Button.ToolTip>
+                </Button>
+                <Button Command="{Binding LibraryViewModel.Previous}" Margin="40,0,0,0" Style="{StaticResource CloseFullScreen}" Tag="..//Resources/LeftLibrary.png"  Content="Left" Height="100" Width="100" >
+                    <Button.ToolTip>
+                            <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[37]}"></TextBlock>
+                        </Button.ToolTip>
+                </Button>
+                    <Button  Margin="40,0,0,0" Command="{Binding LibraryViewModel.FullScreen}" Style="{StaticResource CloseFullScreen}" Tag="..//Resources/Fullscreen.png"  Width="60" Height="60" >
+                    <Button.ToolTip>
+                            <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[38]}"></TextBlock>
+                        </Button.ToolTip>
+                </Button>
+                    <Button Command="{Binding LibraryViewModel.Next}" Margin="40,0,0,0" Style="{StaticResource CloseFullScreen}" Tag="..//Resources/RightLibrary.png"  Content="Right" Height="100" Width="100">
+                    <Button.ToolTip>
+                            <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[39]}"></TextBlock>
+                        </Button.ToolTip>
+                </Button>
+                    <Button Command="{Binding LibraryViewModel.SaveAll}" Margin="40,0,0,0" Style="{StaticResource CloseFullScreen}"  Width="60" Height="60" Tag="..//Resources/SaveAll.png"> 
+                    <Button.ToolTip>
+                            <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[40]}"></TextBlock>
+                        </Button.ToolTip>
+                </Button>
+              </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Controls:MetroWindow>

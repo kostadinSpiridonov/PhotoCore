@@ -1,0 +1,153 @@
+﻿<UserControl x:Class="PhotoCore1._1.View.MainImageView"
+             xmlns:MetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:m="clr-namespace:PhotoCore1._1.Models"
+             xmlns:mv="clr-namespace:PhotoCore1._1.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:conv="clr-namespace:PhotoCore1._1.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style TargetType="TextBox" x:Key="HardBox">
+            <Style.Setters>
+                <Setter Property="BorderThickness" Value="0"></Setter>
+                <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                <Setter Property="Background" Value="Transparent"></Setter>
+            </Style.Setters>
+        </Style>
+        <conv:SizeGridConverter x:Key="SizeConverter"></conv:SizeGridConverter>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="29"></RowDefinition>
+        </Grid.RowDefinitions>
+         <Grid MouseMove="MovePasteImage" Background="WhiteSmoke">
+        <ScrollViewer MouseLeftButtonUp="SetPasteImage"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="1,0,0,1">
+            <Grid Cursor="{Binding VisibilityPropertiesViewModel.Instance.ImageCursor}" Margin="10"   Name="paintSurface" Height="Auto" Width="Auto" MouseLeftButtonDown="paintSurface_MouseLeftButtonDown">
+                  <Grid.LayoutTransform>
+                        <ScaleTransform ScaleX="{Binding ElementName=sldZoom, Path=Value}" ScaleY="{Binding ElementName=sldZoom, Path=Value}" />
+                    </Grid.LayoutTransform>
+                <Grid  x:Name="ImageGrid" Height="{Binding ElementName=ImageOp,Path=ActualHeight,Converter={StaticResource SizeConverter}}" Width="{Binding ElementName=ImageOp,Path=ActualWidth,Converter={StaticResource SizeConverter}}">
+                    <Canvas x:Name="ImageTextCanvas" Background="Transparent">
+                        <Image x:Name="ImageOp" Height="{Binding  ImagesViewModel.Instance.CurrentBitmap.Size.Height}" 
+                             MouseDown="FunctiosClick" MouseLeftButtonDown="ImageOp_MouseLeftButtonDown" Canvas.Top="0" Canvas.Left="0"
+                             Width="{Binding ImagesViewModel.Instance.CurrentBitmap.Size.Width,NotifyOnSourceUpdated=True}" 
+                             HorizontalAlignment="Center"
+                             Source="{Binding ImagesViewModel.Instance.CurrentBitmapImage,NotifyOnSourceUpdated=True,NotifyOnTargetUpdated=True}">
+                         </Image>
+                        <TextBox Style="{StaticResource HardBox}" Background="Transparent"  TextWrapping="Wrap" x:Name="TextBoxInsertText" 
+                                 FontSize="{Binding TopPanelViewModel.FontSize,UpdateSourceTrigger=PropertyChanged}"
+                                 FontFamily="{Binding TopPanelViewModel.FontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  
+                                 AcceptsReturn="True" AcceptsTab="True" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                 Foreground="{Binding ColorsViewModel.MainColor.BrushColor}"
+                                 KeyUp="TextBoxInsertText_KeyDown" AllowDrop="True" IsUndoEnabled="True"
+                                 Visibility="{Binding VisibilityPropertiesViewModel.Instance.InsertTextVisibility,Converter={StaticResource BooleanToVisibilityConverter}}">
+                        </TextBox>
+                    </Canvas>
+                    <Grid >
+                            <Image x:Name="FrameImageControl"
+                               Height="{Binding  ImagesViewModel.Instance.CurrentBitmap.Size.Height}" 
+                               MouseDown="FunctiosClick" MouseLeftButtonDown="ImageOp_MouseLeftButtonDown" Canvas.Top="0" Canvas.Left="0"
+                               Width="{Binding ImagesViewModel.Instance.CurrentBitmap.Size.Width,NotifyOnSourceUpdated=True}" 
+                               HorizontalAlignment="Center"
+                               Visibility="{Binding VisibilityPropertiesViewModel.Instance.FrameVisibility,Converter={StaticResource BooleanToVisibilityConverter}}"
+                               Source="{Binding ImagesViewModel.Instance.Frame.FrameImage,NotifyOnSourceUpdated=True,NotifyOnTargetUpdated=True}">
+                        </Image>
+                    </Grid>
+                </Grid>
+                <Grid >
+                    <Border   Visibility="{Binding VisibilityPropertiesViewModel.Instance.NewListBorder,Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Width="{Binding ElementName=ImageOp,Path=ActualWidth}" 
+                            Height="{Binding ElementName=ImageOp,Path=ActualHeight}" 
+                            Name="borderNew" BorderBrush="Black" BorderThickness="0.2" ></Border>
+                    <Grid>
+                        <Canvas MouseDown="Sel_MouseDown" MouseUp="CanvasMouseUp" Background="Transparent"
+                            MouseMove="CanvasMouseMove" 
+                            Visibility="{Binding Path=VisibilityPropertiesViewModel.Instance.SelectCanvasVisibility,
+                                         Converter={StaticResource BooleanToVisibilityConverter}}"  
+                            x:Name="SelectionCanvas" 
+                            Height="{Binding ElementName=ImageOp,Path=ActualHeight}"
+                            Width="{Binding ElementName=ImageOp,Path=ActualWidth}" >
+                            <Rectangle Fill="#14FFFFFF" StrokeDashArray="5" Stroke="Black" Visibility="{Binding Path=VisibilityPropertiesViewModel.Instance.SelectRectangleVisibility, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                                    x:Name="rectangle" Width="50" Height="50" 
+                                    StrokeDashOffset="0" StrokeThickness="1" RadiusX="0" RadiusY="0"
+                                       IsVisibleChanged="ClearSelectedData"
+                                    Canvas.Left="0" Canvas.Top="0">
+                        </Rectangle>
+                    </Canvas>
+                </Grid>
+                   <Grid>
+                        <Canvas  x:Name="MergeCanvas"  Visibility="{Binding Path=VisibilityPropertiesViewModel.Instance.PastePanelVisibility,
+                                         Converter={StaticResource BooleanToVisibilityConverter}}" 
+                           Height="{Binding ElementName=ImageOp,Path=ActualHeight}"
+                            Width="{Binding ElementName=ImageOp,Path=ActualWidth}">
+                            <Grid x:Name="MergeImage" Canvas.Left="1" Canvas.Top="1" MouseLeftButtonUp="SetImageMerge" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                <Border BorderThickness="3" Visibility="Visible" x:Name="PasteBorder">
+                                <Border.BorderBrush>
+                                    <DrawingBrush Viewport="0,0,8,8" ViewportUnits="Absolute" TileMode="Tile">
+                                        <DrawingBrush.Drawing>
+                                            <DrawingGroup>
+                                                <GeometryDrawing Brush="Blue">
+                                                    <GeometryDrawing.Geometry>
+                                                        <GeometryGroup>
+                                                            <RectangleGeometry Rect="0,0,50,50" />
+                                                            <RectangleGeometry Rect="50,50,50,50" />
+                                                        </GeometryGroup>
+                                                    </GeometryDrawing.Geometry>
+                                                </GeometryDrawing>
+                                            </DrawingGroup>
+                                        </DrawingBrush.Drawing>
+                                    </DrawingBrush>
+                                </Border.BorderBrush>
+                                <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding ImagesViewModel.Instance.PasteBitmapImage}" Height="Auto" Width="Auto"  ></Image>
+                            </Border>
+                        </Grid>
+                    </Canvas>
+                </Grid>
+                   </Grid>
+                <Grid>
+                     <InkCanvas x:Name="InkCan" UseCustomCursor="True"
+                                Cursor="{Binding VisibilityPropertiesViewModel.Instance.ImageCursor}"
+                                Strokes="{Binding DrawingCanvasViewmodel.Strokes, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" Height="{Binding ElementName=ImageOp,Path=ActualHeight}" Width="{Binding ElementName=ImageOp,Path=ActualWidth}" Visibility="{Binding   VisibilityPropertiesViewModel.Instance.InkCanvasVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp" >
+                                <i:InvokeCommandAction Command="{Binding DrawingCanvasViewmodel.Draw}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </InkCanvas>
+                    </Grid>
+                </Grid>
+        </ScrollViewer>
+    </Grid>
+        <Grid Background="Lavender" Grid.ColumnSpan="2" Grid.Row="2">
+            <Border BorderBrush="{Binding ColorsViewModel.ThemeColor}" BorderThickness="1"></Border>
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" >
+                <Button  FontWeight="Bold" FontSize="25" Content="-" Height="25" Width="25" Click="Zoom_Minus_Click" Margin="0,0,10,0" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Canvas>
+                                <Ellipse Height="25" Width="25" Fill="LightGray"/>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="7" Canvas.Top="-8"/>
+                            </Canvas>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Slider  Height="24" Ticks="0.125,0.4,0.8,1,2,3,4,5,6,5,8" IsSnapToTickEnabled="True"  Width="200" VerticalAlignment="Center"  Minimum="0.125" Value="1" Maximum="8" x:Name="sldZoom" Orientation="Horizontal" Margin="0,7,0,0"  />
+                <Button  FontWeight="Bold" FontSize="25" Content="+" Height="25" Width="25" Canvas.Left="714" Canvas.Top="3" Click="Zoom_Plus_Click" Margin="10,0,0,0" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Canvas>
+                                <Ellipse Height="25" Width="25" Fill="LightGray"/>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="4" Canvas.Top="-8"/>
+                            </Canvas>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

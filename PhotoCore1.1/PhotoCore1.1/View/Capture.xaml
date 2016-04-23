@@ -1,0 +1,63 @@
+﻿<Window x:Class="PhotoCore1._1.View.Capture"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Icon="..//MainPanelIcons/Capture.png"
+        Title="Capture"
+        x:Name="CaptureWin" 
+        Background="Black"
+        Opacity="0.4" 
+        WindowState="Maximized" 
+        WindowStyle="None" 
+        AllowsTransparency="True"
+        Height="{Binding SystemParameters.PrimaryScreenHeight}" 
+        Width="{Binding SystemParameters.PrimaryScreenWidth}">
+        <Canvas Margin="0,0,0,0" 
+                MouseDown="Sel_MouseDown" 
+                MouseUp="CanvasMouseUp" 
+                MouseMove="CanvasMouseMove" 
+                Name="CaptureCan" 
+                Background="Transparent">
+            <Rectangle  Stroke="Red"
+                        Visibility="Hidden" 
+                        x:Name="rectangle" 
+                        Width="50" Height="50" 
+                        StrokeDashOffset="0" 
+                        StrokeThickness="3" 
+                        RadiusX="0" RadiusY="0"
+                        Canvas.Left="0" Canvas.Top="0"></Rectangle>
+        <Grid Margin="0,5,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding ElementName=CaptureCan,Path=ActualWidth}">
+                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Content="{Binding LangiageViewModel.CurrentLanguage[33]}" 
+                        Click="Capture_Click"
+                        Height="10" Width="Auto"
+                        HorizontalAlignment="Center"
+                        Canvas.Left="606"
+                        Margin="5,2,5,2">
+                    <Button.ToolTip>
+                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[42]}"></TextBlock>
+                    </Button.ToolTip>
+                </Button>
+                <Button  Content="{Binding LangiageViewModel.CurrentLanguage[34]}" 
+                        Click="Minimize_Click" 
+                        Height="10" Width="Auto" 
+                        Canvas.Left="665"
+                        HorizontalAlignment="Center"
+                        Margin="5,2,5,2">
+                    <Button.ToolTip>
+                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[43]}"></TextBlock>
+                    </Button.ToolTip>
+                </Button>
+                <Button Content="{Binding LangiageViewModel.CurrentLanguage[35]}" 
+                        Click="Close_Click" 
+                        HorizontalAlignment="Center"
+                        Height="10" Width="Auto"
+                        Canvas.Left="728"
+                       Margin="5,2,5,2">
+                    <Button.ToolTip>
+                        <TextBlock Text="{Binding LangiageViewModel.CurrentToolTips[44]}"></TextBlock>
+                    </Button.ToolTip>
+                </Button>
+              </StackPanel>
+           </Grid>
+    </Canvas>
+</Window>
